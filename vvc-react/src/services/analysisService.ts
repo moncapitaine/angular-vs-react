@@ -13,7 +13,13 @@ export const useLoadAnalysis = (id: string | undefined) => {
     if (!id) {
       return
     }
-    loadAnalysis(+id).then((analysis) => setAnalysis({ id: +id, name: `Name von ${analysis.name}`}))
+    loadAnalysis(+id).then((analysis) => setAnalysis({
+      id: +id,
+      mandant: {
+        name: `Name von ${analysis.mandant.name}`,
+      }
+    },
+      ))
   }, [id])
 
   if (!id) {

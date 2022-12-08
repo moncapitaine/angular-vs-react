@@ -9,8 +9,12 @@ export const AnalysisMandantPage = () => {
   return (
     <>
       { !analysis && (<div>loading...</div>)}
-      { analysis && (<h2>Analyse für {analysis.name} ({analysis.id})</h2>)}
-      <Link to="/analyse/9876">9876 Analyse</Link>
+      { analysis && (
+        <>
+          <h2>Analyse für {analysis.mandant.name} ({analysis.id})</h2>
+          <Link to="/analyse/9876/istSituation">{analysis.id} Ist Situation</Link>
+        </>
+      )}
     </>
   )
 }
