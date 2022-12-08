@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Analysis } from "../domain/analysis";
+import { useEffect, useState } from 'react'
+import { Analysis } from '../domain/analysis'
 
 export const loadAnalysis = async (analysisId: number): Promise<Analysis> => {
   const result = await fetch('https://pokeapi.co/api/v2/pokemon/ditto')
@@ -13,17 +13,18 @@ export const useLoadAnalysis = (id: string | undefined) => {
     if (!id) {
       return
     }
-    loadAnalysis(+id).then((analysis) => setAnalysis({
-      id: +id,
-      mandant: {
-        name: `Name von ${analysis.mandant.name}`,
-      }
-    },
-      ))
+    loadAnalysis(+id).then((analysis) =>
+      setAnalysis({
+        id: +id,
+        mandant: {
+          name: `Name von ${analysis.mandant.name}`,
+        },
+      }),
+    )
   }, [id])
 
   if (!id) {
-    return null;
+    return null
   }
 
   return analysis

@@ -1,31 +1,25 @@
 import './App.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-import { HomePage } from './pages/homePage';
-import { AnalysisHomePage } from './pages/analysisHomePage';
-import { AnalysisMandantPage } from './pages/analysisMandantPage';
+import { createBrowserRouter, RouterProvider, Route, Link } from 'react-router-dom'
+import { HomePage } from './pages/homePage'
+import { AnalysisHomePage } from './pages/analysisHomePage'
+import { AnalysisMandantPage } from './pages/analysisMandantPage'
 
 const router = createBrowserRouter([
   {
     path: '/analyse/:id',
-    element: <AnalysisMandantPage />
+    element: <AnalysisMandantPage />,
   },
   {
     path: '/analyse',
-    element: <AnalysisHomePage />
+    element: <AnalysisHomePage />,
   },
   {
-    path: "/",
+    path: '/',
     element: <HomePage />,
   },
-]);
+])
 
 function App() {
-
   return (
     <>
       <header>
@@ -36,7 +30,8 @@ function App() {
         <RouterProvider router={router} />
       </main>
       <footer>Footer</footer>
-    </>)
+    </>
+  )
 }
 
 export default App

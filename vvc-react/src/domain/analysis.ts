@@ -1,22 +1,22 @@
 export interface Analysis {
-  id: number,
+  id: number
   mandant: {
-    name: string,
+    name: string
     isSituation?: IstSituation
-  },
+  }
   partner?: {
-    name: string,
+    name: string
   }
 }
 
 export interface IstSituation {
-  haushaltsEinkommenKunde?: HaushaltsEinkommen,
-  haushaltsEinkommenPartner?: HaushaltsEinkommen,
+  haushaltsEinkommenKunde?: HaushaltsEinkommen
+  haushaltsEinkommenPartner?: HaushaltsEinkommen
 }
 
 export interface HaushaltsEinkommen {
-  id?: number,
-  gehaltBruttoMonatlich?: number,
-  kapitalVermoegen?: number,
-  gehaltNettoMonatlich?: number,
+  id?: number
+  gehaltBruttoMonatlich?: number
+  kapitalVermoegen?: number
+  gehaltNettoMonatlich?: number
 }
