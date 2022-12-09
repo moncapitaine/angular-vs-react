@@ -71,7 +71,7 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
             <li key={field.id}>
               <select {...register(`ownerships.realEstates.${index}.type`)}>
                 <option value='Wohnungseigentum'>Wohnungseigentum</option>
-                <option value='Miete'>Miete</option>
+                <option value='Mieter'>Mieter</option>
               </select>
               <label>
                 Bemerkung
