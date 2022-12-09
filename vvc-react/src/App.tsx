@@ -3,8 +3,13 @@ import { createBrowserRouter, RouterProvider, Route, Link } from 'react-router-d
 import { HomePage } from './pages/homePage'
 import { AnalysisHomePage } from './pages/analysisHomePage'
 import { AnalysisMandantPage } from './pages/analysisMandantPage'
+import { AnalysisIstSituationPage } from './pages/analysisIstSituationPage'
 
 const router = createBrowserRouter([
+  {
+    path: '/analyse/:id/istSituation',
+    element: <AnalysisIstSituationPage />,
+  },
   {
     path: '/analyse/:id',
     element: <AnalysisMandantPage />,

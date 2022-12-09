@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { useLoadAnalysis } from '../services/analysisService'
+import { useLoadAnalysis } from '../services/useLoadAnalysis'
 
 export const AnalysisMandantPage = () => {
   const { id } = useParams()
@@ -7,7 +7,7 @@ export const AnalysisMandantPage = () => {
 
   return (
     <>
-      {!analysis && <div>loading...</div>}
+      {!analysis && <div>Mandant loading...</div>}
       {analysis && (
         <>
           <h2>
