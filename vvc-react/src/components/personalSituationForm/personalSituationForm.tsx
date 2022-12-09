@@ -6,7 +6,7 @@ export interface PersonalSituationFormProps {
 }
 
 export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ data }) => {
-  const { control, register, handleSubmit } = useForm<PersonalSituation>({
+  const { control, register, handleSubmit, formState } = useForm<PersonalSituation>({
     defaultValues: data,
     mode: 'onBlur',
   })
@@ -25,6 +25,11 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
   const onSubmit = (data: PersonalSituation) => console.log(data)
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {formState.isSubmitted && !formState.isValid && (
+        <div>
+          <h3>Fehler aufgetreten</h3>
+        </div>
+      )}
       <article>
         <h3>Mandant</h3>
         {/* Todo: extract component */}
@@ -34,7 +39,7 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
         </label>
         <label>
           <span>Netto</span>
-          <input {...register('incomeMandant.netto')} />
+          <input {...register('incomeMandant.netto', { required: true })} />
         </label>
         <label>
           <span>Kapital</span>
@@ -82,6 +87,7 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
           Real Estate Ownership hinzufügen
         </button>
       </article>
+      <input type='submit' value='Submit' />
     </form>
   )
 }

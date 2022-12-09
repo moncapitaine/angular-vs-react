@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { PersonalSituationForm } from '../components/personalSituationForm/personalSituationForm'
 import { usePersonalSituation } from '../services/usePersonalSituation'
 
 export const AnalysisIstSituationPage = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const { data, saveData } = usePersonalSituation(id)
 
   if (!data) {
@@ -17,7 +18,7 @@ export const AnalysisIstSituationPage = () => {
       <div>
         <button>Speichern</button>
         <button>Verwerfen</button>
-        <button>Zum Kunden</button>
+        <button onClick={() => navigate(`/analyse/${id}`)}>Zum Kunden</button>
       </div>
     </section>
   )

@@ -39,6 +39,7 @@ export interface AnimalOwnership {
 
 export const emptyPersonalSituation: PersonalSituation = {
   incomeMandant: {},
+  // incomePartner: {},
   ownerships: {
     animals: [],
     companies: [],
