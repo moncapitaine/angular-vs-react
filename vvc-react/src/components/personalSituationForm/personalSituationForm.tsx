@@ -1,16 +1,22 @@
-import { useForm, useFieldArray } from 'react-hook-form'
+import { useContext, useEffect, useState } from 'react'
+import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import { PersonalSituation } from '../../domain/personalSituation'
+import { NavigationContext } from '../../services/navigationContext'
+import { ListItemRemark } from './listItemRemark'
 
 export interface PersonalSituationFormProps {
   data: PersonalSituation
+  saveData: (data: PersonalSituation) => void
 }
 
-export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ data }) => {
-  const { control, register, handleSubmit, formState } = useForm<PersonalSituation>({
-    defaultValues: data,
-    mode: 'onBlur',
-  })
+export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ data, saveData }) => {
+  const [showPopup, setShowPopup] = useState(false)
+  const { setNavigationChecker, setContextIsDirty } = useContext(NavigationContext)
 
+  const { control, register, handleSubmit, reset, formState } = useForm<PersonalSituation>({
+    defaultValues: data,
+    mode: 'all',
+  })
   const {
     fields: realEstateFields,
     append: realEstateAppend,
@@ -22,9 +28,31 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
     remove: animalRemove,
   } = useFieldArray({ control, name: 'ownerships.animals' })
 
-  const onSubmit = (data: PersonalSituation) => console.log(data)
+  const onSubmit = (data: PersonalSituation) => {
+    console.log('submitted, ... will save', data)
+    saveData(data)
+    reset(data)
+  }
+
+  useEffect(() => {
+    setContextIsDirty(formState.isDirty)
+    setNavigationChecker(() => {
+      if (!formState.isDirty) {
+        return true
+      }
+      setShowPopup(true)
+      return false
+    })
+  }, [formState.isDirty])
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {showPopup && (
+        <div>
+          Popup
+          <button onClick={() => setShowPopup(false)}>Close</button>
+        </div>
+      )}
       {formState.isSubmitted && !formState.isValid && (
         <div>
           <h3>Fehler aufgetreten</h3>
@@ -58,6 +86,11 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
             <span>Netto</span>
             <input {...register('incomePartner.netto')} />
           </label>
+          <Controller
+            control={control}
+            name='incomeMandant.assets'
+            render={({ field }) => <p>{field.value}</p>}
+          />
           <label>
             <span>Kapital</span>
             <input {...register('incomePartner.assets')} />
@@ -73,10 +106,7 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
                 <option value='Wohnungseigentum'>Wohnungseigentum</option>
                 <option value='Mieter'>Mieter</option>
               </select>
-              <label>
-                Bemerkung
-                <input {...register(`ownerships.realEstates.${index}.remark`)} />
-              </label>
+              <ListItemRemark {...register(`ownerships.realEstates.${index}.remark`)} />
               <button onClick={() => realEstateRemove(index)}>Entfernen</button>
             </li>
           ))}

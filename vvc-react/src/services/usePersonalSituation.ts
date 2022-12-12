@@ -9,7 +9,13 @@ export interface UsePersonalSituationResult {
 export const usePersonalSituation = (
   analysisId: string | undefined,
 ): UsePersonalSituationResult => {
-  const [data, saveData] = useState<PersonalSituation>(emptyPersonalSituation)
+  const [data, setData] = useState<PersonalSituation>(emptyPersonalSituation)
+
+  const saveData = (data: PersonalSituation) => {
+    // deep compare...todo
+    setData((oldData) => ({...oldData, ...data}))
+  }
+
   return {
     data,
     saveData,

@@ -18,6 +18,7 @@ export interface PersonalOwnership {
 }
 
 export interface RealEstateOwnership {
+  id?: string
   type: 'Wohnungseigentum' | 'Mieter'
   remark?: string
 }
@@ -39,11 +40,17 @@ export interface AnimalOwnership {
 
 export const emptyPersonalSituation: PersonalSituation = {
   incomeMandant: {},
-  // incomePartner: {},
+  incomePartner: {},
   ownerships: {
     animals: [],
     companies: [],
-    realEstates: [],
+    realEstates: [
+      {
+        id: '963',
+        type: 'Mieter',
+        remark: 'Alter Mieter',
+      },
+    ],
     vehicles: [],
   },
 }
