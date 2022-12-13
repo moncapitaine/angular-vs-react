@@ -16,6 +16,7 @@ export class AnalyseIstSituationPageComponent implements OnInit, OnDestroy {
     this.paramMapSubscription = route.paramMap.subscribe(
       (paramMap) => this.analyseId = paramMap.get('id')
     )
+    // do not work with snapshots, because will not work..
     this.analyseIdSnapshot = route.snapshot.paramMap.get('id')
   }
 
