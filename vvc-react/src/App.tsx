@@ -1,13 +1,5 @@
 import './App.css'
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  Outlet,
-  Route,
-  RouterProvider,
-  Routes,
-  useNavigate,
-} from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/homePage'
 import { AnalysisHomePage } from './pages/analysisHomePage'
 import { AnalysisMandantPage } from './pages/analysisMandantPage'
@@ -16,27 +8,9 @@ import { MainNavigation } from './components/mainNavigation'
 import { NavigationContext } from './services/navigationContext'
 import { useState } from 'react'
 
-// const router = createBrowserRouter([
-//   {
-//     path: '/analyse/:id/istSituation',
-//     element: <AnalysisIstSituationPage />,
-//   },
-//   {
-//     path: '/analyse/:id',
-//     element: <AnalysisMandantPage />,
-//   },
-//   {
-//     path: '/analyse',
-//     element: <AnalysisHomePage />,
-//   },
-//   {
-//     path: '/',
-//     element: <HomePage />,
-//   },
-// ])
+const defaultNavigate = () => true
 
 function App() {
-  const defaultNavigate = () => true
   const [contextIsDirty, setContextIsDirty] = useState(false)
   const [navigationChecker, setNavigationCheckerInternal] = useState<(path: string) => boolean>(
     () => defaultNavigate,

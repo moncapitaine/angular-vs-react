@@ -22,7 +22,9 @@ export const MainNavigation = () => {
           Navi 1
         </a>
       </li>
-      <li></li>
+      <li><a href="#" onClick={() => {
+        console.log('click')
+      }}>Check test</a></li>
     </ul>
   )
 }

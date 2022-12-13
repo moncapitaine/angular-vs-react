@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { useForm, useFieldArray, Controller } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { PersonalSituation } from '../../domain/personalSituation'
 import { NavigationContext } from '../../services/navigationContext'
 import { ListItemRemark } from './listItemRemark'
@@ -10,6 +11,8 @@ export interface PersonalSituationFormProps {
 }
 
 export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ data, saveData }) => {
+  const navigate = useNavigate()
+  const [navigationPath, setNavigationPath] = useState<string | undefined>()
   const [showPopup, setShowPopup] = useState(false)
   const { setNavigationChecker, setContextIsDirty } = useContext(NavigationContext)
 
@@ -36,11 +39,12 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
 
   useEffect(() => {
     setContextIsDirty(formState.isDirty)
-    setNavigationChecker(() => {
+    setNavigationChecker((path) => {
       if (!formState.isDirty) {
         return true
       }
       setShowPopup(true)
+      setNavigationPath(path)
       return false
     })
   }, [formState.isDirty])
@@ -51,6 +55,21 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
         <div>
           Popup
           <button onClick={() => setShowPopup(false)}>Close</button>
+          <button
+            onClick={() => {
+              navigationPath && navigate(navigationPath)
+            }}
+          >
+            Verwerfen
+          </button>
+          <button
+            onClick={() => {
+              handleSubmit(onSubmit)()
+              navigationPath && navigate(navigationPath)
+            }}
+          >
+            Speichern
+          </button>
         </div>
       )}
       {formState.isSubmitted && !formState.isValid && (
