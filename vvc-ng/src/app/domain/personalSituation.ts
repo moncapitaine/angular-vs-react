@@ -8,6 +8,7 @@ export interface PersonalIncome {
   brutto?: number
   netto?: number
   assets?: number
+  employedSince?: string
 }
 
 export interface PersonalOwnership {
@@ -21,6 +22,7 @@ export interface RealEstateOwnership {
   id?: string
   type: 'Wohnungseigentum' | 'Mieter'
   remark?: string
+  ownedSince?: string
 }
 
 export interface VehicleOwnership {
@@ -42,9 +44,12 @@ export const emptyPersonalSituation: PersonalSituation = {
   incomeMandant: {
     brutto: 12.55,
     netto: 13.99,
-    assets: 0.99
+    assets: 0.99,
+    employedSince: '27.10.1939'
   },
-  incomePartner: {},
+  incomePartner: {
+    netto: 1.0
+  },
   ownerships: {
     animals: [],
     companies: [],
@@ -53,6 +58,7 @@ export const emptyPersonalSituation: PersonalSituation = {
         id: '963',
         type: 'Mieter',
         remark: 'Alter Mieter',
+        ownedSince: '21.03.2020',
       },
     ],
     vehicles: [],

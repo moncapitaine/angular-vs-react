@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IstSituationService } from 'src/app/services/ist-situation.service';
@@ -15,24 +15,53 @@ export class AnalyseIstSituationPageComponent implements OnInit, OnDestroy {
   paramMapSubscription: Subscription
   situationSubscription?: Subscription
 
-  myFormGroup: FormGroup
+  myFormGroup!: FormGroup
+  realEstates!: FormArray
+  vehicles!: FormArray
+  companies!: FormArray
+  animals!: FormArray
 
-  constructor(route: ActivatedRoute, private situationService: IstSituationService) {
+  constructor(
+    route: ActivatedRoute,
+    private fb: FormBuilder,
+    private situationService: IstSituationService) {
     this.paramMapSubscription = route.paramMap.subscribe(
       (paramMap) => this.analyseId = paramMap.get('id')
     )
     // do not work with snapshots, because will not work..
     this.analyseIdSnapshot = route.snapshot.paramMap.get('id')
-
-    this.myFormGroup = new FormGroup({
-      brutto: new FormControl(''),
-      netto: new FormControl('', { validators: [Validators.required]}),
-      assets: new FormControl('')
-    })
+    this.createForm()
   }
 
+  createForm() {
+    this.realEstates = this.fb.array([]),
+    this.vehicles = this.fb.array([]),
+    this.companies = this.fb.array([]),
+    this.animals = this.fb.array([]),
+
+    this.myFormGroup = this.fb.group({
+      incomeMandant: this.fb.group({
+        brutto: [],
+        netto: ['', { validators: [Validators.required]}],
+        assets: [],
+        employedSince: ['', { validators: [Validators.required]}]
+      }),
+      incomePartner: this.fb.group({
+        brutto: [],
+        netto: ['', { validators: [Validators.required]}],
+        assets: []
+      }),
+      ownerships: this.fb.group({
+        realEstates: this.realEstates,
+        vehicles: this.vehicles,
+        companies: this.companies,
+        animals: this.animals,
+      })
+    })
+  }
   onSubmit() {
-    console.log('Submitting', this.myFormGroup.value)
+    console.log('checking errors', this.myFormGroup.errors)
+    console.log('Submitting', this.myFormGroup?.value)
   }
 
   ngOnDestroy(): void {
@@ -42,12 +71,13 @@ export class AnalyseIstSituationPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    
     console.log('ngOnInit')
     this.situationSubscription = this.situationService.getIstSituation$().subscribe((situation) => {
       console.log('patchValue', situation)
-      const income = situation.incomeMandant
-      this.myFormGroup.patchValue(income)
-      console.log(this.myFormGroup.value)
+      // check why the ownership is not in the formgroup
+      this.myFormGroup?.patchValue(situation)
+      console.log(this.myFormGroup?.value)
     })
   }
 }

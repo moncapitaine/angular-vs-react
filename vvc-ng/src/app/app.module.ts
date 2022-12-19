@@ -10,6 +10,8 @@ import { AnalyseIstSituationPageComponent } from './pages/analyse-ist-situation-
 import { ReactiveFormsModule } from '@angular/forms';
 import { IstSituationFormComponent } from './components/ist-situation-form/ist-situation-form.component';
 import { AnalyseDetailsPageComponent } from './pages/analyse-details-page/analyse-details-page.component';
+import { CurrencyInputComponent } from './components/formControls/currency-input/currency-input.component';
+import { DateInputComponent } from './components/formControls/date-input/date-input.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AnalyseDetailsPageComponent } from './pages/analyse-details-page/analys
     AnalyseIstSituationPageComponent,
     IstSituationFormComponent,
     AnalyseDetailsPageComponent,
+    CurrencyInputComponent,
+    DateInputComponent,
   ],
   imports: [
     BrowserModule,

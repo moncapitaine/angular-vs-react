@@ -7,18 +7,63 @@
   style="display: flex; flex-direction: column; gap: 2em;"
   (ngSubmit)="onSubmit()"
   >
-  <label>
-    <span>Brutto</span>
-    <input id="brutto" type="text" formControlName="brutto" />
-  </label>
-  <label>
-    <span>Netto</span>
-    <input id="netto" type="text" formControlName="netto" />
-  </label>
-  <label>
-    <span>Assets</span>
-    <input id="assets" type="text" formControlName="assets" />
-  </label>
+  <fieldset formGroupName="incomeMandant">
+    <h3>Income Mandant</h3>
+    <label>
+      <span>Brutto</span>
+      <input id="brutto" type="text" formControlName="brutto" />
+    </label>
+    <label>
+      <span>Netto</span>
+      <input id="netto" type="text" formControlName="netto" />
+    </label>
+    <label>
+      <span>Assets</span>
+      <input id="assets" type="text" formControlName="assets" />
+    </label>
+    <label>
+      <span>Employed since</span>
+      <app-date-input formControlName="employedSince"></app-date-input>
+    </label>
+  </fieldset>
+
+  <fieldset formGroupName="incomePartner">
+    <h3>Income Partner</h3>
+    <label>
+      <span>Brutto</span>
+      <input id="brutto" type="text" formControlName="brutto" />
+    </label>
+    <label>
+      <span>Netto</span>
+      <app-currency-input formControlName="netto"></app-currency-input>
+    </label>
+    <label>
+      <span>Assets</span>
+      <input id="assets" type="text" formControlName="assets" />
+    </label>
+  </fieldset>
+
+  <fieldset formGroupName="ownerships">
+    <h3>Ownerships</h3>
+    <fieldset formArrayName="realEstates">
+      <h4>Real estates</h4>
+      <div *ngFor="let realEstate of realEstates.controls; let i=index" [formGroupName]="i">
+        <label>
+          <span>id</span>
+          <input [id]="'realrealEstates.' + i + '.id'" type="text" formControlName="id" />
+        </label>
+        <label>
+          <span>type</span>
+          <input [id]="'realrealEstates.' + i + '.type'" type="text" formControlName="type" />
+        </label>
+        <label>
+          <span>Remark</span>
+          <input [id]="'realrealEstates.' + i + '.remark'" type="text" formControlName="remark" />
+        </label>
+      </div>
+    </fieldset>
+  </fieldset>
+  
   <input type="submit" value="Submit" [disabled]="!myFormGroup.valid" />
 </form>
 
