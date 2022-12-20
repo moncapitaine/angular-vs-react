@@ -3,6 +3,8 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { PersonalSituation } from '../../domain/personalSituation'
 import { NavigationContext } from '../../services/navigationContext'
+import { DateInput } from '../controls/dateInput'
+import { MoneyInput } from '../controls/moneyInput'
 import { ListItemRemark } from './listItemRemark'
 
 export interface PersonalSituationFormProps {
@@ -74,7 +76,10 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
       )}
       {formState.isSubmitted && !formState.isValid && (
         <div>
+          <>
           <h3>Fehler aufgetreten</h3>
+          {console.log(formState)}
+          </>
         </div>
       )}
       <article>
@@ -82,15 +87,19 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
         {/* Todo: extract component */}
         <label>
           <span>Brutto</span>
-          <input {...register('incomeMandant.brutto')} />
+          <MoneyInput {...register('incomeMandant.brutto')} />
         </label>
         <label>
           <span>Netto</span>
-          <input {...register('incomeMandant.netto', { required: true })} />
+          <MoneyInput {...register('incomeMandant.netto', { required: true })} />
         </label>
         <label>
           <span>Kapital</span>
-          <input {...register('incomeMandant.assets')} />
+          <MoneyInput {...register('incomeMandant.assets')} />
+        </label>
+        <label>
+          <span>Angestellt seit</span>
+          <DateInput {...register('incomeMandant.employedSince')} />
         </label>
       </article>
 
@@ -99,11 +108,11 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
           <h3>Partner</h3>
           <label>
             <span>Brutto</span>
-            <input {...register('incomePartner.brutto')} />
+            <MoneyInput {...register('incomePartner.brutto')} />
           </label>
           <label>
             <span>Netto</span>
-            <input {...register('incomePartner.netto')} />
+            <MoneyInput {...register('incomePartner.netto')} />
           </label>
           <Controller
             control={control}
@@ -112,7 +121,7 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
           />
           <label>
             <span>Kapital</span>
-            <input {...register('incomePartner.assets')} />
+            <MoneyInput {...register('incomePartner.assets')} />
           </label>
         </article>
       )}

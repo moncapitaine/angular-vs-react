@@ -5,9 +5,10 @@ export interface PersonalSituation {
 }
 
 export interface PersonalIncome {
-  brutto?: number
-  netto?: number
-  assets?: number
+  brutto?: string
+  netto?: string
+  assets?: string
+  employedSince?: string
 }
 
 export interface PersonalOwnership {
