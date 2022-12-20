@@ -47,7 +47,7 @@
     <h3>Ownerships</h3>
     <fieldset formArrayName="realEstates">
       <h4>Real estates</h4>
-      <div *ngFor="let realEstate of realEstates.controls; let i=index" [formGroupName]="i">
+      <article *ngFor="let realEstate of realEstates.controls; let i=index" [formGroupName]="i">
         <label>
           <span>id</span>
           <input [id]="'realrealEstates.' + i + '.id'" type="text" formControlName="id" />
@@ -60,7 +60,29 @@
           <span>Remark</span>
           <input [id]="'realrealEstates.' + i + '.remark'" type="text" formControlName="remark" />
         </label>
-      </div>
+        <button (click)="realEstates.removeAt(i)">remove</button>
+
+        <hr>
+      </article>
+      <button (click)="addRealEstate({ type: 'Mieter'})">Add Real Estate</button>
+
+    </fieldset>
+    <fieldset formArrayName="animals">
+      <h4>Animals</h4>
+      <article *ngFor="let animal of animals.controls; let i=index" [formGroupName]="i">
+        <label>
+          <span>remark</span>
+          <input [id]="'animals.' + i + '.id'" type="text" formControlName="remark" />
+        </label>
+        <label>
+          <span>Animal type</span>
+          <input [id]="'animals.' + i + '.animalType'" type="text" formControlName="animalType" />
+        </label>
+        <button (click)="animals.removeAt(i)">remove</button>
+        <hr>
+      </article>
+      <button (click)="addAnimals({ animalType: 'Hund'})">Add animal</button>
+
     </fieldset>
   </fieldset>
   

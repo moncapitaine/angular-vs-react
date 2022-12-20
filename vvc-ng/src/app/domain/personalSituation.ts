@@ -60,6 +60,12 @@ export const emptyPersonalSituation: PersonalSituation = {
         remark: 'Alter Mieter',
         ownedSince: '21.03.2020',
       },
+      {
+        id: '964',
+        type: 'Wohnungseigentum',
+        remark: 'Neue WOhnung',
+        ownedSince: '1.01.2020',
+      },
     ],
     vehicles: [],
   },
