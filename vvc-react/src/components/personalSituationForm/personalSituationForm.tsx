@@ -133,6 +133,7 @@ export const PersonalSituationForm: React.FC<PersonalSituationFormProps> = ({ da
               <select {...register(`ownerships.realEstates.${index}.type`)}>
                 <option value='Wohnungseigentum'>Wohnungseigentum</option>
                 <option value='Mieter'>Mieter</option>
+                <option value='Pächter'>Pächter</option>
               </select>
               <ListItemRemark {...register(`ownerships.realEstates.${index}.remark`)} />
               <button onClick={() => realEstateRemove(index)}>Entfernen</button>

@@ -17,7 +17,9 @@ export class AnalyseIstSituationPageComponent implements OnInit, OnDestroy {
   paramMapSubscription: Subscription
   situationSubscription?: Subscription
   formStatusSubscription?: Subscription
+  navigateStatusSubscription?: Subscription
   myFormGroup!: FormGroup
+  navigateWasCancelled = false
 
   constructor(
     route: ActivatedRoute,
@@ -112,6 +114,12 @@ export class AnalyseIstSituationPageComponent implements OnInit, OnDestroy {
 
     this.formStatusSubscription = this.myFormGroup.statusChanges.subscribe(status => {
       this.formService.changeFormStatus(status, this.myFormGroup.dirty)
+    })
+
+    this.navigateStatusSubscription = this.formService.getNavigateStatus$().subscribe(status => {
+      if (status === 'cancelled') {
+        this.navigateWasCancelled = true
+      }
     })
   }
 }

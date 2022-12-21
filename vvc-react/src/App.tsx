@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/homePage'
 import { AnalysisHomePage } from './pages/analysisHomePage'
 import { AnalysisMandantPage } from './pages/analysisMandantPage'
@@ -17,7 +17,7 @@ function App() {
   )
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <NavigationContext.Provider
         value={{
           contextIsDirty,
@@ -42,7 +42,7 @@ function App() {
         </main>
         <footer>Footer</footer>
       </NavigationContext.Provider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

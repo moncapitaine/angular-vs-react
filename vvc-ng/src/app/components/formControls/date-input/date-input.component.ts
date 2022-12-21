@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormControl, ControlContainer, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { FormControl, ControlContainer, NG_VALUE_ACCESSOR, Validators, ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-date-input',
@@ -13,7 +13,7 @@ import { FormControl, ControlContainer, NG_VALUE_ACCESSOR, Validators } from '@a
     }
   ]
 })
-export class DateInputComponent {
+export class DateInputComponent implements ControlValueAccessor {
   @ViewChild("internalInput", { static: true }) internalInput?: ElementRef<HTMLInputElement>;
 
   @Input()

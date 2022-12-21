@@ -13,7 +13,18 @@ import { FormService } from './services/form.service';
 class CanNavigate implements CanActivate {
   constructor(private formService: FormService) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.formService.getFormStatus$().pipe(take(1)).pipe(map(currentStatus => currentStatus.status !== 'INVALID' && currentStatus.status !== 'PENDING' && !currentStatus.isDirty))
+    return this.formService.getFormStatus$()
+      .pipe(take(1))
+      .pipe(map(currentStatus => {
+        const canNavigate = currentStatus.status !== 'INVALID' && currentStatus.status !== 'PENDING' && !currentStatus.isDirty
+        if (!canNavigate) {
+          this.formService.navigateCancelled()
+        } else {
+          this.formService.navigateStatusReset()
+        }
+        return canNavigate
+        }
+      ))
   }
 }
 

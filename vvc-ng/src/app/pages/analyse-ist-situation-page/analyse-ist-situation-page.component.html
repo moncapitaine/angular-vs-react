@@ -2,6 +2,7 @@
 <h2>Willkommen bei der Analyse {{analyseId}}</h2>
 <h2>Willkommen bei der Analyse Snapshot{{analyseIdSnapshot}}</h2>
 
+<div *ngIf="navigateWasCancelled">Popup navigate cancelled</div>
 <form
   [formGroup]="myFormGroup"
   style="display: flex; flex-direction: column; gap: 2em;"
