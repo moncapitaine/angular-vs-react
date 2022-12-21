@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "deploy:dev": "node deploy.dev.js",
+    "deploy:dev": "tsc && vite build && node deploy.dev.js",
     "deploy:build": "node deploy.prod.js",
     "preview": "vite preview",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",
