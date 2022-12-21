@@ -1,6 +1,10 @@
+import { KopfNuss } from '../components/kopfNuss'
+
 export const HomePage = () => {
   return (
     <div>
+
+<KopfNuss />
       <section>
         <h2>Analyse</h2>
         <p>Hier kommt die Analyse</p>

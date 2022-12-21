@@ -37,7 +37,7 @@ function App() {
             <Route path='/analyse/:id/istSituation' element={<AnalysisIstSituationPage />} />
             <Route path='/analyse/:id' element={<AnalysisMandantPage />} />
             <Route path='/analyse' element={<AnalysisHomePage />} />
-            <Route path='/Home' element={<HomePage />} />
+            <Route path='/' element={<HomePage />} />
           </Routes>
         </main>
         <footer>Footer</footer>
